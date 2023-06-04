@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, MainContainer, MinorContainer, Title } from './App.styled';
+import { MainContainer } from './App.styled';
 import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 import Statistics from './Statistics/Statistics';
 import Notification from './Notification/Notification';
@@ -21,14 +21,14 @@ const App = () => {
   const handleNeutral = () => {
     setFeedback(prevNeutral => ({
       ...prevNeutral,
-      good: prevNeutral.neutral + 1,
+      neutral: prevNeutral.neutral + 1,
     }));
   };
 
   const handleBad = () => {
     setFeedback(prevBad => ({
       ...prevBad,
-      good: prevBad.bad + 1,
+      bad: prevBad.bad + 1,
     }));
   };
 
@@ -45,14 +45,11 @@ const App = () => {
 
   return (
     <MainContainer>
-      <FeedbackOptions>
-        <Title>Please leave feedback</Title>
-        <MinorContainer>
-          <Button onClick={handleGood}>Good</Button>
-          <Button onClick={handleNeutral}>Neutral</Button>
-          <Button onClick={handleBad}>Bad</Button>
-        </MinorContainer>
-      </FeedbackOptions>
+      <FeedbackOptions
+        handleGood={handleGood}
+        handleNeutral={handleNeutral}
+        handleBad={handleBad}
+      />
       {countTotalFeedback() > 0 ? (
         <Statistics
           good={feedback.good}
